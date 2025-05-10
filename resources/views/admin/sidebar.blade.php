@@ -19,10 +19,10 @@
 
               </li>
               
-              <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Books </a>
+              <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Products </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                  <li><a href="{{url('add_product')}}">Add Book</a></li>
-                  <li><a href="{{url('view_product')}}">View Book</a></li>
+                  <li><a href="{{url('add_product')}}">Add Product</a></li>
+                  <li><a href="{{url('view_product')}}">View Product</a></li>
                   
                 </ul>
               </li>
@@ -43,7 +43,7 @@
               
 
               <li>
-                <a href="{{url('register')}}"><i class="icon-user"></i>Register User
+                <a href="{{url('register1')}}"><i class="icon-user"></i>Register User
               </a>
 
               </li>

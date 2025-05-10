@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -26,13 +27,14 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -49,12 +51,42 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Show the user's profile.
+     */
+    public function show()
+    {
+        $user = Auth::user();
+        return view('home.show', compact('user'));
+    }
+
+    /**
+     * Load profile view.
+     */
+    public function profile()
+    {
+        try {
+            $user = Auth::user();
+            Log::info('Profile accessed', ['user_id' => $user->id]);
+            return view('profile', compact('user'));
+        } catch (\Exception $e) {
+            Log::error('Profile access failed', ['error' => $e->getMessage()]);
+            return redirect()->route('dashboard')->with('error', 'Unable to load profile.');
+        }
+    }
+
+    // Optional: if you want to keep a custom update by ID (not typical for user profile)
+    // Rename this if needed to avoid confusion with main update method
+    public function customUpdate(Request $request, $id)
+    {
+        return redirect()->route('profile')->with('error', 'Update not implemented.');
     }
 }

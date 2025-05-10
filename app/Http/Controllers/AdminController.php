@@ -68,6 +68,7 @@ class AdminController extends Controller
           $data->title = $request->title;
           $data->description = $request->description;
           $data->price = $request->price;
+          $data->discount_price= $request->discount_price;
           $data->quantity = $request->qty;
           $data->category = $request->category;
 
@@ -121,6 +122,7 @@ class AdminController extends Controller
             $data->title = $request->title;
             $data->description = $request->description;
             $data->price = $request->price;
+            $data->discount_price = $request->discount_price;
             $data->quantity = $request->quantity;
             $data->category= $request->category;
             $image = $request->image;
@@ -637,7 +639,7 @@ public function showUsers()
 
  
 
-public function register()
+public function register1()
 {
    $user = User::all();
 

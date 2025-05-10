@@ -15,6 +15,11 @@ use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+
+
+
 
 
 class HomeController extends Controller
@@ -479,10 +484,54 @@ public function stripePost(Request $request,$value): RedirectResponse
             "description" => "Test payment from complete" 
 
     ]);
-    return back()
+    Session::flash('success','Payment sucessful');
+    return back();
 
-        ->with('success', 'Payment successful!');
+       
+        
 }
+
+
+public function profile()
+    {
+        $user = Auth::user();
+        return view('home.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:6|confirmed',
+            'phone' => 'nullable|string|max:20|unique:users,phone,' . $user->id,
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            if ($user->profile_picture && Storage::exists('public/' . $user->profile_picture)) {
+                Storage::delete('public/' . $user->profile_picture);
+            }
+
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->profile_picture = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('home.profile')->with('success', 'Profile updated successfully!');
+    }
+
 
 
 

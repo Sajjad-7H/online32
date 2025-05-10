@@ -80,7 +80,7 @@
                     <th>Customer Name</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Book Title</th>
+                    <th>Product Title</th>
                     <th>Price</th>
                     <th>Image</th>
                     <th>Status</th>

@@ -6,6 +6,7 @@
     <title>Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>[x-cloak] { display: none !important; }</style>
 </head>
 <body class="bg-gray-100">
     @include('admin.header')
@@ -18,10 +19,10 @@
                 <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                     <thead class="bg-gray-200">
                         <tr>
-                            <th class="py-3 px-6 text-left">ID</th>
-                            <th class="py-3 px-6 text-left">Name</th>
-                            <th class="py-3 px-6 text-left">Email</th>
-                            <th class="py-3 px-6 text-left">Actions</th>
+                            <th scope="col" class="py-3 px-6 text-left">ID</th>
+                            <th scope="col" class="py-3 px-6 text-left">Name</th>
+                            <th scope="col" class="py-3 px-6 text-left">Email</th>
+                            <th scope="col" class="py-3 px-6 text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,14 +32,15 @@
                             <td class="py-3 px-6">{{ $user->name }}</td>
                             <td class="py-3 px-6">{{ $user->email }}</td>
                             <td class="py-3 px-6">
-                                <div x-data="{ edit: false }">
-                                    <button @click="edit = !edit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Edit</button>
-                                    
-                                    <form x-show="edit" x-transition action="{{ route('admin.users.update', $user->id) }}" method="POST" class="mt-2 space-y-2">
+                                <div x-data="{ edit_{{ $user->id }}: false }" @click.away="edit_{{ $user->id }} = false" x-cloak>
+                                    <button @click="edit_{{ $user->id }} = !edit_{{ $user->id }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                                        Edit
+                                    </button>
+                                    <form x-show="edit_{{ $user->id }}" x-transition action="{{ route('admin.users.update', $user->id) }}" method="POST" class="mt-2 space-y-2">
                                         @csrf
                                         @method('PATCH')
-                                        <input type="text" name="name" value="{{ $user->name }}" class="border p-2 w-full rounded">
-                                        <input type="email" name="email" value="{{ $user->email }}" class="border p-2 w-full rounded">
+                                        <input type="text" name="name" value="{{ $user->name }}" class="border p-2 w-full rounded" required>
+                                        <input type="email" name="email" value="{{ $user->email }}" class="border p-2 w-full rounded" required>
                                         <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Update</button>
                                     </form>
                                 </div>

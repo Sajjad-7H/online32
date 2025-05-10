@@ -229,7 +229,7 @@
             <tr>
                 <td>{{ $group['product']->title }}</td>
                 <td>{{ $group['quantity'] }}</td>
-                <td>৳ {{ $group['product']->price * $group['quantity'] }}</td>
+                <td>৳ {{ $group['product']->discount_price * $group['quantity'] }}</td>
                 <td>
                     <img width="150" height="150" src="/products/{{ $group['product']->image }}">
                 </td>
@@ -239,7 +239,7 @@
             </tr>
     
             <?php
-            $value += $group['product']->price * $group['quantity'];
+            $value += $group['product']->discount_price * $group['quantity'];
             ?>
         @endforeach
     </table>

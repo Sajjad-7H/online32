@@ -115,7 +115,7 @@
   <div class="page-content">
     <div class="page-header">
       <div class="container-fluid">
-        <h1>Add Book Category</h1>
+        <h1>Add Product Category</h1>
 
         <div class="div_deg">
           <form action="{{url('add_category')}}" method="post">

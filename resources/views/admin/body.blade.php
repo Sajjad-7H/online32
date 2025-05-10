@@ -21,7 +21,7 @@
                 <div class="statistic-block block">
                   <div class="progress-details d-flex align-items-end justify-content-between">
                     <div class="title">
-                      <div class="icon"><i class="icon-contract"></i></div><strong>Total Books</strong>
+                      <div class="icon"><i class="icon-contract"></i></div><strong>Total Products</strong>
                     </div>
                     <div class="number dashtext-2">{{$product}}</div>
                   </div>

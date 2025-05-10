@@ -104,7 +104,7 @@
                 @foreach ($order as $order)
                 <tr>
                     <td>{{$order->product->title}}</td>
-                    <td>{{$order->product->price}}</td>
+                    <td>{{$order->product->discount_price}}</td>
                     <td>{{$order->status}}</td>
                     <td>
                         <img src="products/{{$order->product->image}}">

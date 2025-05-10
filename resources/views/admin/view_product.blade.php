@@ -100,17 +100,18 @@
             <div class="container-fluid">
                 <form action="{{url('book_search')}}" method="get" class="search-container">
                     @csrf
-                    <input type="search" name="search" placeholder="Search books...">
+                    <input type="search" name="search" placeholder="Search products...">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
 
                 <div class="div_deg">
                     <table class="table_deg">
                         <tr>
-                            <th>Book Title</th>
+                            <th>Product Title</th>
                             <th>Description</th>
                             <th>Category</th>
                             <th>Price</th>
+                            <th>Discount Price</th>
                             <th>Quantity</th>
                             <th>Image</th>
                             <th>Edit</th>
@@ -122,6 +123,7 @@
                             <td>{!!Str::limit($products->description,50)!!}</td>
                             <td>{{$products->category}}</td>
                             <td>{{$products->price}}</td>
+                            <td>{{$products->discount_price}}</td>
                             <td>{{$products->quantity}}</td>
                             <td>
                                 <img height="120" width="120" src="products/{{$products->image}}" style="border-radius: 10px;">

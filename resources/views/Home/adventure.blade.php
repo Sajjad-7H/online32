@@ -3,13 +3,13 @@
     <aside class="sidebar">
         <h2>বিষয়</h2>
         <ul style="border: 1px solid #96db9d">
-            <li><a href="{{ url('books?category=E-book') }}">E-book</a></li>
+            <li><a href="{{ url('books?category=E-book') }}">E-Product</a></li>
             <li><a href="{{ url('eaudio?category=E-audio') }}">E-Audio</a></li>
             <li><a href="{{ url('notes?category=notes') }}">Notes</a></li>
-            <li><a href="{{ url('bookmela?category=bookmela') }}">Book Mela</a></li>
+            <li><a href="{{ url('bookmela?category=bookmela') }}">Product Mela</a></li>
             <li><a href="{{ url('islamic?category=islamic') }}">Islamic</a></li>
             <li><a href="{{ url('bengali?category=bengali') }}">Bengali</a></li>
-            <li><a href="{{ url('childrenbooks?category=childrenbooks') }}">ChildrenBooks</a></li>
+            <li><a href="{{ url('childrenbooks?category=childrenbooks') }}">ChildrenProducts</a></li>
             <li><a href="{{ url('historical?category=historical') }}">Historical</a></li>
             <li><a href="{{ url('adventure?category=adventure') }}">Adventure</a></li>
             <li><a href="{{ url('thriller?category=thriller') }}">Thriller</a></li>

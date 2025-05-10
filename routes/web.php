@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 
+
 use App\Http\Controllers\StripePaymentController;
 
 
@@ -148,13 +149,13 @@ Route::post('/admin/upload-book', [AdminController::class, 'uploadBook'])->name(
 
 Route::get('/books', [HomeController::class, 'showBooks'])->name('user.books');
 
-
-
-route::get('register1',[AdminController::class,'register1'])-> middleware(['auth','admin']);
-
+route::get('/register1',[AdminController::class,'register1'])-> middleware(['auth','admin']);
 
 route::get('delete_register/{id}',[AdminController::class,'delete_register'])-> middleware(['auth','admin']);
 
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [HomeController::class, 'profile'])->name('home.profile');
+    Route::put('/profile/{id}', [HomeController::class, 'updateProfile'])->name('user.update');
+});
 

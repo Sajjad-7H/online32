@@ -139,6 +139,11 @@
                 </div>
 
                 <div>
+                    <label style="color: black">Discount Price</label>
+                    <input type="text" name="discount_price" value="{{$data->discount_price}}">
+                </div>
+
+                <div>
                     <label style="color: black">Quantity</label>
                     <input type="number" name="quantity" value="{{$data->quantity}}">
                 </div>
